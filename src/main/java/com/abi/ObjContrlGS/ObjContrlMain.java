@@ -11,7 +11,7 @@ public class ObjContrlMain {
     static float hObjNext = (hMax - hMin) / 2;
 
     public static void main(String[] args) {
-        System.out.println(sumX2(20F, 73.59F, 10.7F));
+        System.out.println(sumX2StatObj(20F, 73.59F, 10.7F));
 
         int i = 1;
         while ( Math.abs(kObjNext - kObj) > kAccuracy ||
@@ -23,13 +23,13 @@ public class ObjContrlMain {
             hObj = hObjNext;
             kObjNext = findNextK();
             System.out.println("i=" + i + " K=" + kObjNext + " T=" + tObjNext + " H=" + hObjNext + " X2=" +
-                    sumX2(kObjNext, tObjNext, hObjNext));
+                    sumX2StatObj(kObjNext, tObjNext, hObjNext));
             tObjNext = findNextT();
             System.out.println("     K=" + kObjNext + " T=" + tObjNext + " H=" + hObjNext + " X2=" +
-                    sumX2(kObjNext, tObjNext, hObjNext));
+                    sumX2StatObj(kObjNext, tObjNext, hObjNext));
             hObjNext = findNextH();
             System.out.println("     K=" + kObjNext + " T=" + tObjNext + " H=" + hObjNext + " X2=" +
-                    sumX2(kObjNext, tObjNext, hObjNext));
+                    sumX2StatObj(kObjNext, tObjNext, hObjNext));
             i++;
         }
         kObj = kObjNext;
@@ -48,8 +48,8 @@ public class ObjContrlMain {
             float kDeltaGS = (kRight - kLeft) / 1.618034F;
             float kLeftLeft = kRight - kDeltaGS;
             float kRightRight = kLeft + kDeltaGS;
-            float sumLeft = sumX2(kLeftLeft, tObjNext, hObjNext);
-            float sumRight = sumX2(kRightRight, tObjNext, hObjNext);
+            float sumLeft = sumX2StatObj(kLeftLeft, tObjNext, hObjNext);
+            float sumRight = sumX2StatObj(kRightRight, tObjNext, hObjNext);
             if (sumLeft < sumRight) {
                 kRight = kRightRight;
             } else {
@@ -70,7 +70,7 @@ public class ObjContrlMain {
             float tDeltaGS = (tRight - tLeft) / 1.618034F;
             float tLeftLeft = tRight - tDeltaGS;
             float tRightRight = tLeft + tDeltaGS;
-            if (sumX2(kObjNext, tLeftLeft, hObjNext) < sumX2(kObjNext, tRightRight, hObjNext)) {
+            if (sumX2StatObj(kObjNext, tLeftLeft, hObjNext) < sumX2StatObj(kObjNext, tRightRight, hObjNext)) {
                 tRight = tRightRight;
             } else {
                 tLeft = tLeftLeft;
@@ -90,8 +90,8 @@ public class ObjContrlMain {
             float hDeltaGS = (hRight - hLeft) / 1.618034F;
             float hLeftLeft = hRight - hDeltaGS;
             float hRightRight = hLeft + hDeltaGS;
-            float sumLeft = sumX2(kObjNext, tObjNext, hLeftLeft);
-            float sumRight = sumX2(kObjNext, tObjNext, hRightRight);
+            float sumLeft = sumX2StatObj(kObjNext, tObjNext, hLeftLeft);
+            float sumRight = sumX2StatObj(kObjNext, tObjNext, hRightRight);
             if (sumLeft < sumRight) {
                 hRight = hRightRight;
             } else {
@@ -102,7 +102,7 @@ public class ObjContrlMain {
         return hObjNext;
     }
 
-    static float sumX2(float k, float t, float h) {
+    static float sumX2StatObj(float k, float t, float h) {
         float sumX2 = 0F;
 //        System.out.println(expTime[3] - h);
 //        System.out.println((expTime[3] - h) / t);
@@ -123,3 +123,4 @@ public class ObjContrlMain {
         return sumX2;
     }
 }
+
