@@ -119,7 +119,28 @@ public class ObjContrlMain {
             }
 //            System.out.println(expTime[i] + "  " + rasRez);
             sumX2 += Math.pow((expRez[i] - rasRez), 2);
+        }
+        return sumX2;
     }
+
+    static float sumX2Jbj2nd(float k, float t, float h) {
+        float sumX2 = 0F;
+//        System.out.println(expTime[3] - h);
+//        System.out.println((expTime[3] - h) / t);
+//        System.out.println(Math.exp(-(expTime[3] - h) / t));
+//        System.out.println(1 - Math.exp(-(expTime[3] - h) / t));
+//        System.out.println(k * dZ * (1 - Math.exp(-(expTime[3] - h) / t)));
+//        System.out.println(expRez[0] + k * dZ * (1 - Math.exp(-(expTime[3] - h) / t)));
+        for (int i = 0; i < expTime.length; i++) {
+            float rasRez = 0F;
+            if (expTime[i] <= h) {
+                rasRez += expRez[0] + 0F;
+            } else {
+                rasRez += expRez[0] + k * dZ * (1 - Math.exp(-(expTime[i] - h) / t));
+            }
+//            System.out.println(expTime[i] + "  " + rasRez);
+            sumX2 += Math.pow((expRez[i] - rasRez), 2);
+        }
         return sumX2;
     }
 }
